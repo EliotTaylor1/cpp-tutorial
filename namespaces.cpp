@@ -14,7 +14,10 @@ namespace second{
 
 int main(){
 using namespace first; //define the namespace for the whole function
-    std::cout << "int = " << x << std::endl;
-    std::cout << "int = " << second::x << std::endl; // define the namespace scope specifically with 'second::'
+using std::cout; //removes the need for std::cout every time we use cout
+using std::endl;
+
+    cout << "int = " << x << endl;
+    cout << "int = " << second::x << endl; // define the namespace scope specifically with 'second::'
     return 0;
 }
