@@ -16,6 +16,7 @@ int main(){
     char secondInitial = 'T';
     string name = "Eliot"; //string variable
     bool is18; //boolean variabe
+    const int DAILY_WORKING_HOURS = 7; //constant variables can't be changed. Usually named in all caps
 
     std::cout << "The first initial of your first name is: " << firstInitial << std::endl;
     std::cout << "The first initial of your second name is: " << secondInitial << std::endl;
