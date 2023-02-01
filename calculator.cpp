@@ -14,7 +14,7 @@ char function;
     cout << "Enter first number: " << flush;
     cin >> num1;
 
-    cout <<"Enter your operator: " << flush;
+    cout <<"Enter your operator (+,-,/,*,>,<): " << flush;
     cin >> function;
 
     cout << "Enter your second number: " << flush;
