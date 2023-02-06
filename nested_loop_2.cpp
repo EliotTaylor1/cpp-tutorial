@@ -2,14 +2,28 @@
 
 int main(){
     using std::cout;
+    using std::cin;
     using std::endl;
     using std::flush;
 
-    for (int i = 0; i <= 3; i++)
+    int rows;
+    int columns;
+    char symbol;
+
+    cout << "How many rows?: " << flush;
+    cin >> rows;
+
+    cout << "How many columns?: " << flush;
+    cin >> columns;
+
+    cout << "What character/symbol?: " << flush;
+    cin >> symbol;
+
+    for (int i = 1; i <= rows; i++)
     {
-        for (int j = 0; j <=7; j++)
+        for (int j = 1; j <=columns; j++)
         {
-            cout << "|" << flush;
+            cout << symbol << flush;
         }
         cout << endl;
     }
