@@ -40,7 +40,7 @@ int main(){
             reset(retry, num);
             resetLives(lives);
             retry = userRetry(decision, retry);
-            std::cout << "reset loop done - the value of lives is: " << lives << std::endl;
+            std::cout << "reset loop - the value of lives is: " << lives << std::endl;
         }
     } while (retry==1);
     
@@ -104,7 +104,7 @@ bool userRetry(char decision, bool retry){
 }
 
 int resetLives(int lives){
-    lives = 6;
+        lives = 6;
     std::cout << "resetLives has run, the value of lives is:" << lives << std::endl;
     return lives;
 }
