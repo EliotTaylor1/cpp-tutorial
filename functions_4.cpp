@@ -9,6 +9,7 @@ char getDecision(char decision);
 bool userRetry(char decision, bool retry);
 int reset(bool retry, int num);
 int resetLives(int lives);
+bool playAgain(char decision, bool replay);
 
 
 
@@ -19,6 +20,7 @@ int main(){
     int guess;
     bool correct;
     bool retry = 1;
+    bool replay;
     char decision;
     std::string hint;
     num = generateRandomNumber(num);
@@ -31,8 +33,19 @@ int main(){
         correct = checkAnswer(num, guess, correct);
             if(correct==1){
                 std::cout << "You got the answer right!" << std::endl;
+                decision = getDecision(decision);
+                if(decision=='Y' || decision=='y'){
+                std::cout << "You have chosen to play again" << std::endl;
+                lives = resetLives(lives);
+                num = generateRandomNumber(num);
+                retry = 1;
+                continue;
+                }
+                if(decision=='N' || decision=='n'){
+                std::cout << "You have chosen not to play again" << std::endl;
                 std::cout << "Ending..." << std::endl;
                 break;
+                }
             }
         hint = giveHint(num, guess, hint);
         std::cout << hint << std::endl;
@@ -88,7 +101,7 @@ std::string giveHint(int num, int guess, std::string hint){
 }
 
 char getDecision(char decision){
-    std::cout << "Would you like to retry? Y/N: " << std::flush;
+    std::cout << "Would you like to play again? Y/N: " << std::flush;
     std::cin >> decision;
     return decision;
 }
