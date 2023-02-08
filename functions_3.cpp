@@ -2,17 +2,20 @@
 
 std::string getFirstName(std::string firstName);
 std::string getLastName(std::string lastName);
-void printFullName(std::string firstName, std::string lastName);
+std::string concatName(std::string firstName, std::string lastName, std::string fullName);
+void printFullName(std::string fullName);
 
 int main(){
 
 std::string firstName;
 std::string lastName;
+std::string fullName;
 
 firstName = getFirstName(firstName);
 lastName = getLastName(lastName);
+fullName = concatName(firstName, lastName, fullName);
 
-printFullName(firstName, lastName);
+printFullName(fullName);
 
     return 0;
 }
@@ -29,6 +32,11 @@ std::string getLastName(std::string lastName){
     return lastName;
 }
 
-void printFullName(std::string firstName, std::string lastName){
-    std::cout << "Your full name is: " << firstName << " " << lastName << std::endl;
+std::string concatName(std::string firstName, std::string lastName, std::string fullName){
+    fullName = firstName + " " + lastName;
+    return fullName;
+}
+
+void printFullName(std::string fullName){
+    std::cout << "Your full name is: " << fullName << std::endl;
 }
