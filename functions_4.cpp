@@ -11,9 +11,11 @@ bool userRetry(char decision, bool retry);
 int reset(bool retry, int num);
 int resetLives(int lives);
 
+int lives = 6;
+
 int main(){
 
-    int lives = 6;
+
     int num;
     int guess;
     bool correct;
@@ -21,6 +23,7 @@ int main(){
     char decision;
     std::string hint;
     num = generateRandomNumber(num);
+    lives = updateLives(lives);
 
     do
     {   
