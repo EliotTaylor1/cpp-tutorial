@@ -23,22 +23,24 @@ int main(){
     num = generateRandomNumber(num);
 
     do
-    {
+    {   
         std::cout << "loop start" << std::endl;
         std::cout << "the answer is: " << num << std::endl;
         std::cout << "the value of lives is: " << lives << std::endl;
-        lives--;
         std::cout << "You have " << lives << " lives remaining." << std::endl;
         guess = getGuess(guess);
         hint = giveHint(num, guess, hint);
         std::cout << hint << std::endl;
         correct = checkAnswer(num, guess, correct);
+        lives = updateLives(lives);
 
         if(lives==0){
             std::cout << "You're out of lives." << std::endl;
             decision = getDecision(decision);
-            retry = userRetry(decision, retry);
             reset(retry, num);
+            resetLives(lives);
+            retry = userRetry(decision, retry);
+            std::cout << "reset loop done - the value of lives is: " << lives << std::endl;
         }
     } while (retry==1);
     
@@ -102,9 +104,8 @@ bool userRetry(char decision, bool retry){
 }
 
 int resetLives(int lives){
-    std::cout << "resetLives has run" << std::endl;
     lives = 6;
-    std::cout << "the value of lives is: " << lives << std::endl;
+    std::cout << "resetLives has run, the value of lives is:" << lives << std::endl;
     return lives;
 }
 
