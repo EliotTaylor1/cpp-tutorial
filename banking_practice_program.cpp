@@ -25,11 +25,11 @@ do
     std::cin >> selection;
     switch (selection)
     {
-    case 1:
+    case 1: //deposit money
         balance = balance + depositMoney(deposit);
         getBalance(balance);
         break;
-    case 2:
+    case 2: //make withdrawal
         withdraw = getWithdrawValue(withdraw);
         negativeBalance = checkNegativeBalance(negativeBalance, balance, withdraw);
         if(negativeBalance==0){
@@ -40,10 +40,10 @@ do
         getBalance(balance);
         }
         break;
-    case 3:
+    case 3: //check balance
         getBalance(balance);
         break;
-    case 4:
+    case 4: //exit
         exit = 'Y';
         break;
     default:
@@ -83,7 +83,7 @@ void getBalance(int balance){
 bool checkNegativeBalance(bool negativeBalance, int balance, int withdraw){
     if(withdraw > balance){
         std::cout << "You don't have sufficient funds." << std::endl;
-        std::cout << "Aboring withdrawal." << std::endl;
+        std::cout << "Aborting withdrawal." << std::endl;
         negativeBalance = 1;
     }
     if (withdraw < balance){
