@@ -2,11 +2,13 @@
 
 
 void showMenu();
-double depositMoney(double deposit);
-double getWithdrawValue(double withdraw);
-bool checkNegativeBalance(bool negativeBalance, int balance, int withdraw);
-double makeWithdrawal(double withdraw, double balance);
+double getDepositValue();
+double depositMoney(double balance, double deposit);
+double getWithdrawValue();
+bool checkNegativeBalance(int balance, int withdraw);
+double makeWithdrawal(double balance, double withdraw);
 void getBalance(int balance);
+bool checkValidDeposit(double deposit);
 
 int main(){
 
@@ -15,6 +17,7 @@ double balance = 0;
 double deposit;
 double withdraw;
 bool negativeBalance = 0;
+bool checkDeposit;
 char exit = 'N';
 
 std::cout << "Welcome to the banking app" << std::endl;
@@ -26,14 +29,21 @@ do
     switch (selection)
     {
     case 1: //deposit money
-        balance = balance + depositMoney(deposit);
+        deposit = getDepositValue();
+        checkDeposit = checkValidDeposit(deposit);
+        if(checkDeposit==1){
+        balance = balance + depositMoney(balance, deposit);
         getBalance(balance);
+        }
+        if(checkDeposit==0){
+        std::cout << "Aborting deposit." << std::endl; 
+        }
         break;
     case 2: //make withdrawal
-        withdraw = getWithdrawValue(withdraw);
-        negativeBalance = checkNegativeBalance(negativeBalance, balance, withdraw);
+        withdraw = getWithdrawValue();
+        negativeBalance = checkNegativeBalance(balance, withdraw);
         if(negativeBalance==0){
-        balance = makeWithdrawal(withdraw, balance);
+        balance = balance - makeWithdrawal(balance, withdraw);
         getBalance(balance);
         }
         if(negativeBalance==1){
@@ -63,16 +73,35 @@ void showMenu(){
     std::cout << "Please select your action: " << std::flush;
 }
 
-double depositMoney(double deposit){
-std::cout << "Enter your deposit amount: " << std::flush;
-std::cin >> deposit;
-std::cout << "Deposit complete." << std::endl;
-return deposit;
+double getDepositValue(){
+    double deposit;
+    std::cout << "Enter your deposit amount: " << std::flush;
+    std::cin >> deposit;
+    return deposit;
 }
 
-double getWithdrawValue(double withdraw){
-std::cout << "Enter your withdrawal amount: " << std::flush;
-std::cin >> withdraw;
+double depositMoney(double balance, double deposit){
+    balance = balance + deposit;    
+    std::cout << "Deposit complete." << std::endl;
+    return deposit;
+}
+
+bool checkValidDeposit(double deposit){
+    bool checkDeposit;
+    if(deposit>0){
+        return checkDeposit=1;
+    }
+    else{
+        std::cout << "Not a valid deposit amount." << std::endl;
+       
+        return checkDeposit=0;
+    }
+}
+
+double getWithdrawValue(){
+    double withdraw;
+    std::cout << "Enter your withdrawal amount: " << std::flush;
+    std::cin >> withdraw;
 return withdraw;
 }
 
@@ -80,19 +109,19 @@ void getBalance(int balance){
     std::cout << "Your current balance is: " << balance << std::endl;
 }
 
-bool checkNegativeBalance(bool negativeBalance, int balance, int withdraw){
+bool checkNegativeBalance(int balance, int withdraw){
+    bool negativeBalance;
     if(withdraw > balance){
         std::cout << "You don't have sufficient funds." << std::endl;
         std::cout << "Aborting withdrawal." << std::endl;
-        negativeBalance = 1;
+        return negativeBalance = 1;
     }
-    if (withdraw < balance){
-        negativeBalance = 0;
+    else{
+       return negativeBalance = 0;
     }
-    return negativeBalance;
 }
 
-double makeWithdrawal(double withdraw, double balance){
+double makeWithdrawal(double balance, double withdraw){
     balance = balance - withdraw;
     return balance;
 }
