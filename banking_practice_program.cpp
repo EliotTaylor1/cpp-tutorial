@@ -3,7 +3,9 @@
 
 void showMenu();
 double depositMoney(double deposit);
-double withdrawMoney(double withdraw);
+double getWithdrawValue(double withdraw);
+bool checkNegativeBalance(bool negativeBalance, int balance, int withdraw);
+double makeWithdrawal(double withdraw, double balance);
 void getBalance(int balance);
 
 int main(){
@@ -12,6 +14,7 @@ int selection;
 double balance = 0;
 double deposit;
 double withdraw;
+bool negativeBalance = 0;
 char exit = 'N';
 
 std::cout << "Welcome to the banking app" << std::endl;
@@ -27,8 +30,15 @@ do
         getBalance(balance);
         break;
     case 2:
-        balance = balance - withdrawMoney(withdraw);
+        withdraw = getWithdrawValue(withdraw);
+        negativeBalance = checkNegativeBalance(negativeBalance, balance, withdraw);
+        if(negativeBalance==0){
+        balance = makeWithdrawal(withdraw, balance);
         getBalance(balance);
+        }
+        if(negativeBalance==1){
+        getBalance(balance);
+        }
         break;
     case 3:
         getBalance(balance);
@@ -59,13 +69,30 @@ std::cin >> deposit;
 std::cout << "Deposit complete." << std::endl;
 return deposit;
 }
-double withdrawMoney(double withdraw){
+
+double getWithdrawValue(double withdraw){
 std::cout << "Enter your withdrawal amount: " << std::flush;
 std::cin >> withdraw;
-std::cout << "Withdrawal complete." << std::endl;
 return withdraw;
-
 }
+
 void getBalance(int balance){
     std::cout << "Your current balance is: " << balance << std::endl;
+}
+
+bool checkNegativeBalance(bool negativeBalance, int balance, int withdraw){
+    if(withdraw > balance){
+        std::cout << "You don't have sufficient funds." << std::endl;
+        std::cout << "Aboring withdrawal." << std::endl;
+        negativeBalance = 1;
+    }
+    if (withdraw < balance){
+        negativeBalance = 0;
+    }
+    return negativeBalance;
+}
+
+double makeWithdrawal(double withdraw, double balance){
+    balance = balance - withdraw;
+    return balance;
 }
