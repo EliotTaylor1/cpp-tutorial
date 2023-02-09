@@ -4,7 +4,7 @@
 char getUserInput();
 char getComputerInput();
 void showChoice(char choice);
-bool determineWinner(char userchoice, char computerchoice);
+int determineWinner(char userchoice, char computerchoice);
 char playAgain();
 int allocatePoints();
 void showScore(int userscore, int computerscore);
@@ -14,7 +14,7 @@ int main(){
 char userInput;
 char computerInput;
 char play = 'Y';
-bool winner;
+int winner;
 int computerScore = 0;
 int userScore = 0;
 
@@ -32,7 +32,7 @@ do{
     else if(winner==0){
         computerScore = computerScore + allocatePoints();
     }
-    else{
+    if(winner==3){
         std::cout << "No points awarded." << std::endl;
     }
     showScore(userScore, computerScore);
@@ -103,8 +103,8 @@ default:
 }
 }
 
-bool determineWinner(char userinput, char computerinput){
-    bool playerwin;
+int determineWinner(char userinput, char computerinput){
+    int playerwin;
     if(userinput == 'R' && computerinput == 'p'){
         std::cout << "Computer wins." <<std::endl;
         return playerwin=0;
@@ -123,11 +123,11 @@ bool determineWinner(char userinput, char computerinput){
     }
     if(userinput == 'R' && computerinput == 'r'){
         std::cout << "It's a draw." <<std::endl;
-        return 0;
+        return playerwin=2;
     }
     if(userinput == 'r' && computerinput == 'r'){
         std::cout << "It's a draw." <<std::endl;
-        return 0;
+        return playerwin=2;
     } 
     if(userinput == 'S' && computerinput == 'p'){
         std::cout << "You win." <<std::endl;
@@ -147,11 +147,11 @@ bool determineWinner(char userinput, char computerinput){
     }
     if(userinput == 'S' && computerinput == 's'){
         std::cout << "It's a draw." <<std::endl;
-        return 0;
+        return playerwin=2;
     }
     if(userinput == 's' && computerinput == 's'){
         std::cout << "It's a draw." <<std::endl;
-        return 0;
+        return playerwin=2;
     } 
     if(userinput == 'P' && computerinput == 'r'){
         std::cout << "You win." <<std::endl;
@@ -171,11 +171,11 @@ bool determineWinner(char userinput, char computerinput){
     }
     if(userinput == 'P' && computerinput == 'p'){
         std::cout << "It's a draw." <<std::endl;
-        return 0;
+        return playerwin=2;
     }
     if(userinput == 'p' && computerinput == 'p'){
         std::cout << "It's a draw." <<std::endl;
-        return 0;
+        return playerwin=2;
     } 
 }
 
