@@ -3,21 +3,39 @@
 
 char getUserInput();
 char getComputerInput();
-void showChoices(char userchoice, char computerchoice);
-void determineWinner(char userchoice, char computerchoice);
+void showChoice(char choice);
+bool determineWinner(char userchoice, char computerchoice);
 char playAgain();
+int allocatePoints();
+void showScore(int userscore, int computerscore);
 
 int main(){
 
 char userInput;
 char computerInput;
 char play = 'Y';
+bool winner;
+int computerScore = 0;
+int userScore = 0;
 
 do{
     userInput = getUserInput();
     computerInput = getComputerInput();
-    showChoices(userInput, computerInput);
-    determineWinner(userInput, computerInput);
+    std::cout << "You chose: " << std::flush;
+    showChoice(userInput);
+    std::cout << "Computer chose: " << std::flush;
+    showChoice(computerInput);
+    winner = determineWinner(userInput, computerInput);
+    if(winner==1){
+    userScore = userScore + allocatePoints();
+    }
+    else if(winner==0){
+        computerScore = computerScore + allocatePoints();
+    }
+    else{
+        std::cout << "No points awarded." << std::endl;
+    }
+    showScore(userScore, computerScore);
     play = playAgain();
 
 }
@@ -59,100 +77,105 @@ char getComputerInput(){
     }
 }
 
-void showChoices(char userchoice, char computerchoice){
-switch (userchoice)
+void showChoice(char choice){
+switch (choice)
 {
 case 'R':
-    std::cout << "You chose: Rock" << std::endl;
+    std::cout << "Rock" << std::endl;
     break;
 case 'r':
-    std::cout << "You chose: Rock" << std::endl;
+    std::cout << "Rock" << std::endl;
     break;
 case 'P':
-    std::cout << "You chose: Paper" << std::endl;
+    std::cout << "Paper" << std::endl;
     break;
 case 'p':
-    std::cout << "You chose: Paper" << std::endl;
+    std::cout << "Paper" << std::endl;
     break;
 case 'S':
-    std::cout << "You chose: Scissors" << std::endl;
+    std::cout << "Scissors" << std::endl;
     break;
 case 's':
-    std::cout << "You chose: Scissors" << std::endl;
-    break;
-default:
-    break;
-}
-switch (computerchoice)
-{
-case 'r':
-    std::cout << "Computer chose: Rock" << std::endl;
-    break;
-case 'p':
-    std::cout << "Computer chose: Paper" << std::endl;
-    break;
-case 's':
-    std::cout << "Computer chose: Scissors" << std::endl;
+    std::cout << "Scissors" << std::endl;
     break;
 default:
     break;
 }
 }
 
-void determineWinner(char userinput, char computerinput){
+bool determineWinner(char userinput, char computerinput){
+    bool playerwin;
     if(userinput == 'R' && computerinput == 'p'){
         std::cout << "Computer wins." <<std::endl;
+        return playerwin=0;
     }
     if(userinput == 'r' && computerinput == 'p'){
         std::cout << "Computer wins." <<std::endl;
+        return playerwin=0;
     }
     if(userinput == 'R' && computerinput == 's'){
         std::cout << "You win." <<std::endl;
+        return playerwin=1;
     }
     if(userinput == 'r' && computerinput == 's'){
         std::cout << "You win." <<std::endl;
+        return playerwin=1;
     }
     if(userinput == 'R' && computerinput == 'r'){
         std::cout << "It's a draw." <<std::endl;
+        return 0;
     }
     if(userinput == 'r' && computerinput == 'r'){
         std::cout << "It's a draw." <<std::endl;
+        return 0;
     } 
     if(userinput == 'S' && computerinput == 'p'){
-        std::cout << "You won." <<std::endl;
+        std::cout << "You win." <<std::endl;
+        return playerwin=1;
     }
     if(userinput == 's' && computerinput == 'p'){
-        std::cout << "You won." <<std::endl;
+        std::cout << "You win." <<std::endl;
+        return playerwin=1;
     }
     if(userinput == 'S' && computerinput == 'r'){
         std::cout << "Computer wins." <<std::endl;
+        return playerwin=0;
     }
     if(userinput == 's' && computerinput == 'r'){
         std::cout << "Computer wins." <<std::endl;
+        return playerwin=0;
     }
     if(userinput == 'S' && computerinput == 's'){
         std::cout << "It's a draw." <<std::endl;
+        return 0;
     }
     if(userinput == 's' && computerinput == 's'){
         std::cout << "It's a draw." <<std::endl;
+        return 0;
     } 
     if(userinput == 'P' && computerinput == 'r'){
-        std::cout << "You won." <<std::endl;
+        std::cout << "You win." <<std::endl;
+        return playerwin=1;
     }
     if(userinput == 'p' && computerinput == 'r'){
-        std::cout << "You won." <<std::endl;
+        std::cout << "You win." <<std::endl;
+        return playerwin=1;
     }
     if(userinput == 'P' && computerinput == 's'){
         std::cout << "Computer wins." <<std::endl;
+        return playerwin=0;
     }
     if(userinput == 'p' && computerinput == 's'){
         std::cout << "Computer wins." <<std::endl;
+        return playerwin=0;
     }
     if(userinput == 'P' && computerinput == 'p'){
         std::cout << "It's a draw." <<std::endl;
+        return 0;
     }
     if(userinput == 'p' && computerinput == 'p'){
         std::cout << "It's a draw." <<std::endl;
+        return 0;
     } 
 }
 
@@ -161,4 +184,14 @@ char playAgain(){
     std::cout << "Would you like to play again? Y/N: " << std::flush;
     std::cin >> input;
     return input;
+}
+
+int allocatePoints(){
+    int score =1;
+    return score;
+}
+
+void showScore(int userscore, int computerscore){
+    std::cout << "The score is:" << std::endl;
+    std::cout << "Computer " << computerscore << " : " << userscore << " Player" << std::endl;
 }
