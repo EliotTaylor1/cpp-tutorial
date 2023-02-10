@@ -27,6 +27,7 @@ int main(){
     do
     {   
         std::cout << "You have " << lives << " lives remaining." << std::endl;
+        std::cout << '\n';
         guess = getGuess();
         correct = checkAnswer(num, guess);
             if(correct==1){
@@ -34,6 +35,7 @@ int main(){
                 decision = getDecision();
                 if(decision=='Y' || decision=='y'){
                 std::cout << "You have chosen to play again" << std::endl;
+                std:: cout << '\n';
                 lives = resetLives();
                 num = generateRandomNumber();
                 retry = 1;
@@ -55,6 +57,7 @@ int main(){
             decision = getDecision();
                 if(decision=='Y' || decision=='y'){
                 std::cout << "You have chosen to retry" << std::endl;
+                std:: cout << '\n';
                 lives = resetLives();
                 num = generateRandomNumber();
                 retry = 1;
@@ -75,14 +78,25 @@ int generateRandomNumber(){
     std::cout << "Generating random number..." << std::endl;
     srand(time(NULL));
     num = rand()% 10 + 1;
-    std::cout << "Random number generated." << std::endl;
+    std::cout << "Random number between 1-10 generated." << std::endl;
     return num;
 }
 
 int getGuess(){
     int guess;
-    std::cout << "Enter your guess: " << std::flush;
-    std::cin >> guess; 
+    do
+    {
+        std::cout << "Enter your guess: " << std::flush;
+        std::cin >> guess;
+        if(guess>10){
+            std::cout << "Your guess can't be bigger than 10." <<std::endl;
+        }
+        if(guess <1){
+            std::cout << "Your guess can't be less than 1." <<std::endl;
+        }
+    } while (guess >10 || guess <1);
+    
+ 
     return guess;
 }
 
