@@ -32,7 +32,7 @@ do{
     else if(winner==0){
         computerScore = computerScore + allocatePoints();
     }
-    if(winner==3){
+    if(winner==2){
         std::cout << "No points awarded." << std::endl;
     }
     showScore(userScore, computerScore);
