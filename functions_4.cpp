@@ -14,7 +14,7 @@ int resetLives();
 
 int main(){
 
-    int lives = 5;
+    int lives = 3;
     int num;
     int guess;
     bool correct;
@@ -128,7 +128,7 @@ bool userRetry(char decision){
 }
 
 int resetLives(){
-    int lives = 5;
+    int lives = 3;
     return lives;
 }
 
