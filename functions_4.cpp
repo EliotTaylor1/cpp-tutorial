@@ -26,7 +26,6 @@ int main(){
 
     do
     {   
-        std::cout << "the answer is: " << num << std::endl;
         std::cout << "You have " << lives << " lives remaining." << std::endl;
         guess = getGuess();
         correct = checkAnswer(num, guess);
@@ -52,6 +51,7 @@ int main(){
 
         if(lives==0){
             std::cout << "You're out of lives." << std::endl;
+            std::cout << "The answer was: " << num << std::endl;
             decision = getDecision();
                 if(decision=='Y' || decision=='y'){
                 std::cout << "You have chosen to retry" << std::endl;
