@@ -123,5 +123,5 @@ bool checkNegativeBalance(int balance, int withdraw){
 
 double makeWithdrawal(double balance, double withdraw){
     balance = balance - withdraw;
-    return balance;
+    return withdraw;
 }
