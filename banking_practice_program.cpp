@@ -32,7 +32,7 @@ do
         deposit = getDepositValue();
         checkDeposit = checkValidDeposit(deposit);
         if(checkDeposit==1){
-        balance = balance + depositMoney(balance, deposit);
+        balance = depositMoney(balance, deposit);
         getBalance(balance);
         }
         if(checkDeposit==0){
@@ -43,7 +43,7 @@ do
         withdraw = getWithdrawValue();
         negativeBalance = checkNegativeBalance(balance, withdraw);
         if(negativeBalance==0){
-        balance = balance - makeWithdrawal(balance, withdraw);
+        balance = makeWithdrawal(balance, withdraw);
         getBalance(balance);
         }
         if(negativeBalance==1){
@@ -83,7 +83,7 @@ double getDepositValue(){
 double depositMoney(double balance, double deposit){
     balance = balance + deposit;    
     std::cout << "Deposit complete." << std::endl;
-    return deposit;
+    return balance;
 }
 
 bool checkValidDeposit(double deposit){
@@ -123,5 +123,5 @@ bool checkNegativeBalance(int balance, int withdraw){
 
 double makeWithdrawal(double balance, double withdraw){
     balance = balance - withdraw;
-    return withdraw;
+    return balance;
 }
