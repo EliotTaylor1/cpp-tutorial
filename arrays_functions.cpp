@@ -7,7 +7,7 @@ int main(){
 
     int results[] = {5,1,2,3,5,10,1,1,2,9};
     int resultArraySize = sizeof(results)/sizeof(results[0]); //get the amount of entries in the array to pass to function
-    total = getTotal(results, resultArraySize);
+    total = getTotal(results, resultArraySize); //when passing an array to a function as an argument dont need []
 
     std::cout << total << std::endl;
     
