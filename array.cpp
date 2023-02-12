@@ -15,6 +15,15 @@ int main(){
     dec [3] = 40;
 
     std::cout << dec[2] <<std::endl;
+    std::cout << "For loop start" << std::endl;
+
+    for (int i = 0; i < sizeof(dec)/sizeof(int); i++) //iterate over the full array using a for loop.
+    // use sizeof to iterate over all elements automatically without needing to enter a new 'i' value if the amount
+    //of elements changes.
+    {
+        std::cout << dec[i] << std::endl;
+    }
+    
 
     return 0;
 }
