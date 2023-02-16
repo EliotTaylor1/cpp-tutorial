@@ -1,14 +1,13 @@
 #include <iostream>
 #include <ctime>
 
-int generateRandomNumber();
-int getGuess();
-bool checkAnswer(int num, int guess);
-std::string giveHint(int num, int guess);
-char getDecision();
-bool userRetry(char decision);
-int reset(bool retry);
-int resetLives();
+void generateRandomNumber(int &num);
+void getGuess(int &guess);
+void checkAnswer(int num, int guess, bool &correct);
+void giveHint(int num, int guess);
+void getDecision(char &decision);
+void reset(bool retry, int &num, int &lives);
+void resetLives(int &lives);
 
 
 
@@ -19,26 +18,24 @@ int main(){
     int guess;
     bool correct;
     bool retry = 1;
-    bool replay;
     char decision;
     std::string hint;
-    num = generateRandomNumber();
+
+    generateRandomNumber(num); 
 
     do
     {   
         std::cout << "You have " << lives << " lives remaining." << std::endl;
         std::cout << '\n';
-        guess = getGuess();
-        correct = checkAnswer(num, guess);
+        getGuess(guess);
+        checkAnswer(num, guess, correct);
             if(correct==1){
                 std::cout << "You got the answer right!" << std::endl;
-                decision = getDecision();
+                getDecision(decision);
                 if(decision=='Y' || decision=='y'){
                 std::cout << "You have chosen to play again" << std::endl;
                 std:: cout << '\n';
-                lives = resetLives();
-                num = generateRandomNumber();
-                retry = 1;
+                reset(retry, num, lives);
                 continue;
                 }
                 if(decision=='N' || decision=='n'){
@@ -47,20 +44,17 @@ int main(){
                 break;
                 }
             }
-        hint = giveHint(num, guess);
-        std::cout << hint << std::endl;
+        giveHint(num, guess);
         lives--;
 
         if(lives==0){
             std::cout << "You're out of lives." << std::endl;
             std::cout << "The answer was: " << num << std::endl;
-            decision = getDecision();
+            getDecision(decision);
                 if(decision=='Y' || decision=='y'){
                 std::cout << "You have chosen to retry" << std::endl;
                 std:: cout << '\n';
-                lives = resetLives();
-                num = generateRandomNumber();
-                retry = 1;
+                reset(retry, num, lives);
                 }
                 if(decision=='N' || decision=='n'){
                 std::cout << "You have chosen not to retry" << std::endl;
@@ -73,17 +67,15 @@ int main(){
     return 0;
 }
 
-int generateRandomNumber(){
-    int num;
+void generateRandomNumber(int &num){
     std::cout << "Generating random number..." << std::endl;
     srand(time(NULL));
     num = rand()% 10 + 1;
     std::cout << "Random number between 1-10 generated." << std::endl;
-    return num;
 }
 
-int getGuess(){
-    int guess;
+void getGuess(int &guess){
+    
     do
     {
         std::cout << "Enter your guess: " << std::flush;
@@ -95,61 +87,32 @@ int getGuess(){
             std::cout << "Your guess can't be less than 1." <<std::endl;
         }
     } while (guess >10 || guess <1);
-    
- 
-    return guess;
 }
 
-bool checkAnswer(int num, int guess){
-    bool correct;
- num == guess? correct=1 : correct=0;
- return correct;
+void checkAnswer(int num, int guess, bool &correct){
+ num == guess ? correct=1 : correct=0;
 }
 
-std::string giveHint(int num, int guess){
-    std::string hint;
+void giveHint(int num, int guess){
     if(guess < num){
-        hint = "Guess is too low";
+        std::cout << "Guess is too low" << std::endl;
     }
     if(guess > num){
-        hint = "Guess is too high";
+        std::cout << "Guess is too high" << std::endl;
     }
-    return hint;
 }
 
-char getDecision(){
-    char decision;
+void getDecision(char &decision){
     std::cout << "Would you like to play again? Y/N: " << std::flush;
     std::cin >> decision;
-    return decision;
 }
 
-bool userRetry(char decision){
-    bool retry;
-    if(decision=='Y' || decision=='y'){
-    std::cout << "You have chosen to retry" << std::endl;
-    return retry = 1;
-    }
-    else if(decision=='N' || decision=='n'){
-    std::cout << "You have chosen not to retry" << std::endl;
-    std::cout << "Ending..." << std::endl;
-    return retry = 0;
-    }
-    else{
-    std::cout << "Invalid response." << std::endl; 
-    return retry =0; 
-    }
+void resetLives(int &lives){
+    lives = 3;
 }
 
-int resetLives(){
-    int lives = 3;
-    return lives;
-}
-
-int reset(bool retry){
-    int num;
-    if(retry==1){
-    num = generateRandomNumber();
-    }
-    return num;
+void reset(bool retry, int &num, int &lives){
+    generateRandomNumber(num);
+    resetLives(lives);
+    retry = 1;
 }
