@@ -7,6 +7,7 @@ int main(){
     std::cin >> *sentance;
 
     std::cout << *sentance << std::endl;
+    std::cout << sentance << std::endl;
 
     delete sentance; //'delete' removes the allocated memory from the heap
     return 0;
